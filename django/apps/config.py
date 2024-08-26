@@ -1,6 +1,7 @@
 import inspect
 import os
 from importlib import import_module
+import logging
 
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.functional import cached_property
@@ -8,6 +9,8 @@ from django.utils.module_loading import import_string, module_has_submodule
 
 APPS_MODULE_NAME = "apps"
 MODELS_MODULE_NAME = "models"
+
+logger = logging.getLogger(__name__)
 
 
 class AppConfig:
@@ -195,7 +198,10 @@ class AppConfig:
         # Check for obvious errors. (This check prevents duck typing, but
         # it could be removed if it became a problem in practice.)
         if not issubclass(app_config_class, AppConfig):
-            raise ImproperlyConfigured("'%s' isn't a subclass of AppConfig." % entry)
+            # raise ImproperlyConfigured("'%s' isn't a subclass of AppConfig." % entry)
+            raise ImproperlyConfigured(
+                f"IMPROPER APP CONFIG APP CLASS {app_config_class} MODULE {app_module}"
+            )
 
         # Obtain app name here rather than in AppClass.__init__ to keep
         # all error checking for entries in INSTALLED_APPS in one place.

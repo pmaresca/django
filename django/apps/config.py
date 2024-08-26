@@ -1,7 +1,6 @@
 import inspect
 import os
 from importlib import import_module
-import logging
 
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.functional import cached_property
@@ -9,8 +8,6 @@ from django.utils.module_loading import import_string, module_has_submodule
 
 APPS_MODULE_NAME = "apps"
 MODELS_MODULE_NAME = "models"
-
-logger = logging.getLogger(__name__)
 
 
 class AppConfig:

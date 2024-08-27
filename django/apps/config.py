@@ -194,11 +194,14 @@ class AppConfig:
 
         # Check for obvious errors. (This check prevents duck typing, but
         # it could be removed if it became a problem in practice.)
-        if not issubclass(app_config_class, AppConfig):
-            # raise ImproperlyConfigured("'%s' isn't a subclass of AppConfig." % entry)
+        try:
+            if not issubclass(app_config_class, AppConfig):
+                raise ImproperlyConfigured("'%s' isn't a subclass of AppConfig." % entry)
+        except TypeError:
             raise ImproperlyConfigured(
                 f"IMPROPER APP CONFIG APP CLASS {app_config_class} MODULE {app_module}"
             )
+
 
         # Obtain app name here rather than in AppClass.__init__ to keep
         # all error checking for entries in INSTALLED_APPS in one place.

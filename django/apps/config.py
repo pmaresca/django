@@ -199,7 +199,7 @@ class AppConfig:
                 raise ImproperlyConfigured("'%s' isn't a subclass of AppConfig." % entry)
         except TypeError:
             raise ImproperlyConfigured(
-                f"IMPROPER APP CONFIG APP CLASS {app_config_class} MODULE {app_module}"
+                f"IMPROPER ENTRY {entry} APP CONFIG APP CLASS {app_config_class} MODULE {app_module}"
             )
 
 
